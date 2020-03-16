@@ -1,9 +1,10 @@
 {
 	"ignore": [],
 	"delay": 100,
-	"exec": "ts-node src/index.ts",
+	"exec": "jest --coverage",
 	"watch": [
-		"src/*"
+		"src/*",
+		"test/*"
 	],
 	"ext": "js,jsx,ts,tsx,json"
 }

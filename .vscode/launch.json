@@ -4,6 +4,7 @@
 	// For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
 	"version": "0.2.0",
 	"configurations": [
+		// Src:
 		{
 			"name": "Debug Current TS File",
 			"type": "node",
@@ -17,17 +18,17 @@
 				"ts-node/register"
 			],
 			"sourceMaps": true,
-			"cwd": "${workspaceRoot}",
+			"cwd": "${workspaceFolder}",
 			"protocol": "inspector",
 			"console": "integratedTerminal",
 			"internalConsoleOptions": "neverOpen"
 		},
 		{
-			"name": "Debug by ts-node",
+			"name": "Debug Main by TS-Node",
 			"type": "node",
 			"request": "launch",
 			"args": [
-				"${workspaceRoot}/src/index.ts"
+				"${workspaceFolder}/src/index.ts"
 			],
 			"runtimeArgs": [
 				"--nolazy",
@@ -35,36 +36,24 @@
 				"ts-node/register"
 			],
 			"sourceMaps": true,
-			"cwd": "${workspaceRoot}",
+			"cwd": "${workspaceFolder}",
 			"protocol": "inspector",
 			"console": "integratedTerminal",
 			"internalConsoleOptions": "neverOpen"
 		},
+		// Tests:
 		{
-			"name": "Debug Current TS Tests File",
+			"name": "Debug Current Test File",
 			"type": "node",
 			"request": "launch",
-			"program": "${workspaceRoot}/node_modules/.bin/_mocha",
-			"args": [
-				"-r",
-				"ts-node/register",
-				"${relativeFile}",
-				"--colors",
-				"-t 100000"
-			],
-			"cwd": "${workspaceRoot}",
-			"protocol": "inspector",
-			"console": "integratedTerminal",
-			"internalConsoleOptions": "neverOpen"
-		},
-		{
-			"type": "node",
-			"request": "launch",
-			"name": "Jest All",
 			"program": "${workspaceFolder}/node_modules/.bin/jest",
 			"args": [
-				"--runInBand"
+				"${fileBasenameNoExtension}",
+				"--config",
+				"jest.config.js"
 			],
+			"cwd": "${workspaceFolder}",
+			"protocol": "inspector",
 			"console": "integratedTerminal",
 			"internalConsoleOptions": "neverOpen",
 			"disableOptimisticBPs": true,
@@ -73,15 +62,17 @@
 			}
 		},
 		{
+			"name": "Debug All Test",
 			"type": "node",
 			"request": "launch",
-			"name": "Jest Current File",
 			"program": "${workspaceFolder}/node_modules/.bin/jest",
 			"args": [
-				"${fileBasenameNoExtension}",
+				"--runInBand",
 				"--config",
 				"jest.config.js"
 			],
+			"cwd": "${workspaceFolder}",
+			"protocol": "inspector",
 			"console": "integratedTerminal",
 			"internalConsoleOptions": "neverOpen",
 			"disableOptimisticBPs": true,
