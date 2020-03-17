@@ -1,4 +1,4 @@
-import R, { comparator } from 'ramda';
+import R from 'ramda';
 
 
 // 练习 1

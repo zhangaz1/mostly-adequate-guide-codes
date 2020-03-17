@@ -1,20 +1,24 @@
 import {
+	hasmethod,
+	testData,
+	expects,
+} from '../support';
+
+import {
 	words,
 	sentences,
 	filterQs,
 	max,
 	slice,
 	take,
-} from '../src/curry-exercises';
-
-const expectEqual = (expected: any, actual: any) => expect(actual).toEqual(expected);
-const expectBe = (expected: any, actual: any) => expect(actual).toBe(expected);
+} from '../../src/part1/curry';
 
 describe('curry-exercises', () => {
+	const _expects = expects as hasmethod;
 	test('words', () => {
 		const result = words('Jingle bells Batman smells');
 		const expected = ['Jingle', 'bells', 'Batman', 'smells'];
-		expectEqual(result, expected);
+		_expects.toEqual(result, expected);
 	});
 
 	test('sentences', () => {
@@ -28,7 +32,7 @@ describe('curry-exercises', () => {
 			['Jingle', 'bells', 'Batman', 'smells'],
 			['Robin', 'laid', 'an', 'egg']
 		];
-		expectEqual(result, expected);
+		_expects.toEqual(result, expected);
 	});
 
 	test('filterQs', () => {
@@ -36,24 +40,24 @@ describe('curry-exercises', () => {
 			filterQs(['quick', 'camels', 'quarry', 'over', 'quails'])
 			;
 		const expected = ['quick', 'quarry', 'quails'];
-		expectEqual(result, expected);
+		_expects.toEqual(result, expected);
 	});
 
 	test('max', () => {
 		const result = max([323, 523, 554, 123, 5234, 88]);
 		const expected = 5234;
-		expectBe(result, expected);
+		_expects.toBe(result, expected);
 	});
 
 	test('slice', () => {
 		const result = slice(2, 5, [1, 2, 3, 4, 5, 6, 7]);
 		const expected = [3, 4, 5];
-		expectEqual(result, expected);
+		_expects.toEqual(result, expected);
 	});
 
 	test('take', () => {
 		const result = take(2, ['a', 'b', 'c']);
 		const expected = ['a', 'b'];
-		expectEqual(result, expected);
+		_expects.toEqual(result, expected);
 	});
 });
