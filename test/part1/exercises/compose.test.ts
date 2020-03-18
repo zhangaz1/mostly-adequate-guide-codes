@@ -1,8 +1,8 @@
 import {
 	testData,
 	runTests,
-} from '../support';
-import composeExercises from '../../src/part1/compose';
+} from '../../support';
+import composeExercises from '../../../src/part1/exercises/compose';
 
 describe('compose-exercise', () => {
 	let testDatas: testData[] = [{

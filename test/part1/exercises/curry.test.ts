@@ -1,9 +1,9 @@
 import {
 	testData,
 	runTests,
-} from '../support';
+} from '../../support';
 
-import curryExcercises from '../../src/part1/curry';
+import curryExcercises from '../../../src/part1/exercises/curry';
 
 describe('curry-exercises', () => {
 	let testDatas: testData[] = [{
