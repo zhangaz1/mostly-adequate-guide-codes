@@ -46,9 +46,8 @@ require([
 	});
 	const mediaUrl = path(['media', 'm']);
 
-	const srcs = _.compose(_.map(mediaUrl), _.prop('items'));
-
-	const images = _.compose(_.map(img), srcs);
+	const mediaToImage = _.compose(img, mediaUrl);
+	const images = _.compose(_.map(mediaToImage), _.prop('items'));
 
 
 	/*#############################################################################
@@ -57,8 +56,12 @@ require([
 	const renderImages = _.compose(Impure.setHtml('#main'), images);
 	const app = _.compose(Impure.getJSON(renderImages), url);
 
-	const start = _.compose(Impure.setHtml('#tags'), _.map(btn(app)));
+	const search = () => app($('#key').val());
+	const bindSearch = () => $('#search').click(search);
 
+	const bindTags = _.compose(Impure.setHtml('#tags'), _.map(btn(app)));
+
+	const start = _.compose(bindSearch, bindTags);
 	start(tags);
 
 });
