@@ -22,6 +22,10 @@ describe('compose-exercise', () => {
 		action: 'availablePrices',
 		expected: '$700,000.00, $1,850,000.00',
 		sentence: 'toBe',
+	}, {
+		action: 'fastestCar',
+		expected: 'Aston Martin One-77 is the fastest',
+		sentence: 'toBe',
 	}];
 
 

@@ -86,11 +86,11 @@ const availablePrices = R.compose<car[], car[], number[], string[], string>(
 // // ============
 // // Refactor to pointfree. Hint: you can use _.flip()
 
-// var fastestCar = function(cars) {
-//   var sorted = _.sortBy(function(car){ return car.horsepower }, cars);
-//   var fastest = _.last(sorted);
-//   return fastest.name + ' is the fastest';
-// };
+const fastestCar = function (cars: car[]) {
+	var sorted = R.sortBy(function (car) { return car.horsepower }, cars);
+	var fastest = R.last(sorted);
+	return fastest?.name + ' is the fastest';
+};
 
 
 // module.exports = { CARS: CARS,
@@ -109,4 +109,5 @@ export default {
 	averageDollarValue,
 	sanitizeNames,
 	availablePrices,
+	fastestCar,
 };
