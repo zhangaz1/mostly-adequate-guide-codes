@@ -86,12 +86,18 @@ const availablePrices = R.compose<car[], car[], number[], string[], string>(
 // // ============
 // // Refactor to pointfree. Hint: you can use _.flip()
 
-const fastestCar = function (cars: car[]) {
-	var sorted = R.sortBy(function (car) { return car.horsepower }, cars);
-	var fastest = R.last(sorted);
-	return fastest?.name + ' is the fastest';
-};
-
+// const fastestCar = function (cars: car[]) {
+// 	var sorted = R.sortBy(function (car) { return car.horsepower }, cars);
+// 	var fastest = R.last(sorted);
+// 	return fastest?.name + ' is the fastest';
+// };
+const append = R.flip(R.concat);
+const fastestCar = R.compose<car[], car[], car, string, string>(
+	append(' is the fastest'),
+	R.prop('name'),
+	R.last,
+	R.sortBy(R.prop('horsepower'))
+);
 
 // module.exports = { CARS: CARS,
 //                    isLastInStock: isLastInStock,
