@@ -4,11 +4,14 @@ export interface hasmethod {
 	[index: string]: Function,
 };
 
-export interface testData {
-	action: string,
-	expected: any,
+export interface defaultTestData {
 	params?: any[],
 	sentence?: string,
+}
+
+export interface testData extends defaultTestData {
+	action: string,
+	expected: any,
 };
 
 export const expects = {
@@ -16,19 +19,28 @@ export const expects = {
 	toBe: (expected: any, actual: any) => expect(actual).toBe(expected),
 };
 
-export const runTests = (testTarget: any, defaultParams: any[] = []) => {
+export const runTests = (testTarget: any, specialDefaultFields: defaultTestData = {}) => {
 	const _expects = expects as hasmethod;
 	const _testTarget = testTarget as unknown as hasmethod;
+	const defaultFields = { params: [], sentence: 'toEqual' };
+	const {
+		params: defaultParams,
+		sentence: defaultSentence
+	} = R.merge(
+		defaultFields,
+		specialDefaultFields
+	);
 
 	return R.forEach(({
 		action,
 		expected,
 		params = defaultParams,
-		sentence = 'toBe',
+		sentence = defaultSentence,
 	}: testData) => {
 		test(action, () => {
 			const result = _testTarget[action]
-				.apply(testTarget, params);
+				.apply(_testTarget, params);
+
 			_expects[sentence](result, expected);
 		});
 	});

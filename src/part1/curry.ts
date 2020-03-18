@@ -58,3 +58,12 @@ export const slice = R.curry((start: number, end: number, xs: any[]) => {
 // ============
 // 借助 `slice` 定义一个 `take` curry 函数，该函数调用后可以取出字符串的前 n 个字符。
 export const take = slice(0);
+
+export default {
+	words,
+	sentences,
+	filterQs,
+	max,
+	slice,
+	take,
+};

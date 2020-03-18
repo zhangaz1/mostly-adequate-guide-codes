@@ -1,63 +1,50 @@
 import {
-	hasmethod,
 	testData,
-	expects,
+	runTests,
 } from '../support';
 
-import {
-	words,
-	sentences,
-	filterQs,
-	max,
-	slice,
-	take,
-} from '../../src/part1/curry';
+import curryExcercises from '../../src/part1/curry';
 
 describe('curry-exercises', () => {
-	const _expects = expects as hasmethod;
-	test('words', () => {
-		const result = words('Jingle bells Batman smells');
-		const expected = ['Jingle', 'bells', 'Batman', 'smells'];
-		_expects.toEqual(result, expected);
-	});
-
-	test('sentences', () => {
-		const result =
-			sentences([
-				"Jingle bells Batman smells",
-				"Robin laid an egg"
-			])
-			;
-		const expected = [
+	let testDatas: testData[] = [{
+		action: 'words',
+		expected: ['Jingle', 'bells', 'Batman', 'smells'],
+		params: ['Jingle bells Batman smells'],
+		sentence: 'toEqual',
+	}, {
+		action: 'sentences',
+		expected: [
 			['Jingle', 'bells', 'Batman', 'smells'],
 			['Robin', 'laid', 'an', 'egg']
-		];
-		_expects.toEqual(result, expected);
-	});
+		],
+		params: [[
+			"Jingle bells Batman smells",
+			"Robin laid an egg"
+		]],
+		sentence: 'toEqual',
+	}, {
+		action: 'filterQs',
+		expected: ['quick', 'quarry', 'quails'],
+		params: [['quick', 'camels', 'quarry', 'over', 'quails']],
+		sentence: 'toEqual',
+	}, {
+		action: 'max',
+		expected: 5234,
+		params: [[323, 523, 554, 123, 5234, 88]],
+		sentence: 'toBe',
+	}, {
+		action: 'slice',
+		expected: [3, 4, 5],
+		params: [2, 5, [1, 2, 3, 4, 5, 6, 7]],
+		sentence: 'toEqual',
+	}, {
+		action: 'take',
+		expected: ['a', 'b'],
+		params: [2, ['a', 'b', 'c']],
+		sentence: 'toEqual',
+	},];
 
-	test('filterQs', () => {
-		const result =
-			filterQs(['quick', 'camels', 'quarry', 'over', 'quails'])
-			;
-		const expected = ['quick', 'quarry', 'quails'];
-		_expects.toEqual(result, expected);
-	});
+	runTests(curryExcercises, { sentence: 'toBe' })
+		(testDatas);
 
-	test('max', () => {
-		const result = max([323, 523, 554, 123, 5234, 88]);
-		const expected = 5234;
-		_expects.toBe(result, expected);
-	});
-
-	test('slice', () => {
-		const result = slice(2, 5, [1, 2, 3, 4, 5, 6, 7]);
-		const expected = [3, 4, 5];
-		_expects.toEqual(result, expected);
-	});
-
-	test('take', () => {
-		const result = take(2, ['a', 'b', 'c']);
-		const expected = ['a', 'b'];
-		_expects.toEqual(result, expected);
-	});
 });

@@ -21,5 +21,6 @@ describe('compose-exercise', () => {
 	}];
 
 
-	runTests(composeExercises, [composeExercises.CARS])(testDatas);
+	runTests(composeExercises, { params: [composeExercises.CARS] })
+		(testDatas);
 });
