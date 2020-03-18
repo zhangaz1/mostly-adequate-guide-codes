@@ -1,11 +1,11 @@
 import {
-	testData,
+	TestData,
 	runTests,
 } from '../../support';
 import composeExercises from '../../../src/part1/exercises/compose';
 
 describe('compose-exercise', () => {
-	let testDatas: testData[] = [{
+	let testDatas: TestData[] = [{
 		action: 'isLastInStock',
 		expected: false,
 	}, {

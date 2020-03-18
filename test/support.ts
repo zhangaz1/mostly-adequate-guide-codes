@@ -1,47 +1,49 @@
 import R from 'ramda';
 
-export interface hasmethod {
-	[index: string]: Function,
+import expects from './expects';
+
+interface DefaultTestData {
+	params?: any[],
+	sentence?: keyof typeof expects,
 };
 
-export interface defaultTestData {
-	params?: any[],
-	sentence?: string,
-}
-
-export interface testData extends defaultTestData {
+export interface TestData extends DefaultTestData {
 	action: string,
 	expected: any,
 };
 
-export const expects = {
-	toEqual: (expected: any, actual: any) => expect(actual).toEqual(expected),
-	toBe: (expected: any, actual: any) => expect(actual).toBe(expected),
+interface ActualDefaultTestData extends DefaultTestData {
+	sentence: keyof typeof expects,
+}
+
+const DEFAULT_TEST_DATA_FIELDS: ActualDefaultTestData = {
+	params: [],
+	sentence: 'toEqual'
 };
 
-export const runTests = (testTarget: any, specialDefaultFields: defaultTestData = {}) => {
-	const _expects = expects as hasmethod;
-	const _testTarget = testTarget as unknown as hasmethod;
-	const defaultFields = { params: [], sentence: 'toEqual' };
+export const runTests = (testTarget: any, specialDefaultFields: DefaultTestData) => {
 	const {
 		params: defaultParams,
 		sentence: defaultSentence
-	} = R.merge(
-		defaultFields,
+	}: ActualDefaultTestData = R.merge(
+		DEFAULT_TEST_DATA_FIELDS,
 		specialDefaultFields
 	);
+
+	const _testTarget = R.prop(R.__, testTarget)
+	const _expectes = R.prop(R.__, expects);
 
 	return R.forEach(({
 		action,
 		expected,
 		params = defaultParams,
 		sentence = defaultSentence,
-	}: testData) => {
+	}: TestData) => {
 		test(action, () => {
-			const result = _testTarget[action]
-				.apply(_testTarget, params);
+			const result = _testTarget(action)
+				.apply(testTarget, params);
 
-			_expects[sentence](result, expected);
+			_expectes(sentence)(result, expected);
 		});
 	});
 };

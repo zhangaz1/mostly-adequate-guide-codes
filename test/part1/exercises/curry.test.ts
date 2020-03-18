@@ -1,12 +1,12 @@
 import {
-	testData,
+	TestData,
 	runTests,
 } from '../../support';
 
 import curryExcercises from '../../../src/part1/exercises/curry';
 
 describe('curry-exercises', () => {
-	let testDatas: testData[] = [{
+	let testDatas: TestData[] = [{
 		action: 'words',
 		expected: ['Jingle', 'bells', 'Batman', 'smells'],
 		params: ['Jingle bells Batman smells'],

@@ -1,11 +1,7 @@
 import R from 'ramda';
 import accounting from 'accounting';
 
-export interface hasStringIndex {
-	[index: string]: any,
-};
-
-interface car extends hasStringIndex {
+interface Car {
 	name: string,
 	horsepower: number,
 	dollar_value: number,
@@ -13,7 +9,7 @@ interface car extends hasStringIndex {
 };
 
 // Example Data
-const CARS: car[] = [
+const CARS: Car[] = [
 	{ name: 'Ferrari FF', horsepower: 660, dollar_value: 700000, in_stock: true },
 	{ name: 'Spyker C12 Zagato', horsepower: 650, dollar_value: 648000, in_stock: false },
 	{ name: 'Jaguar XKR-S', horsepower: 550, dollar_value: 132000, in_stock: false },
@@ -56,7 +52,7 @@ const averageDollarValue = R.compose(_average, R.map(R.prop('dollar_value')));
 const _underscore = R.replace(/\W+/g, '_'); //<-- leave this alone and use to sanitize
 
 const sanitizeNames = R.map(
-	R.compose<car, string, string, string>(
+	R.compose<Car, string, string, string>(
 		_underscore,
 		R.toLower,
 		R.prop('name')
@@ -75,7 +71,7 @@ const sanitizeNames = R.map(
 // 	}).join(', ');
 // };
 
-const availablePrices = R.compose<car[], car[], number[], string[], string>(
+const availablePrices = R.compose<Car[], Car[], number[], string[], string>(
 	R.join(', '),
 	R.map<number, string>(accounting.formatMoney),
 	R.pluck('dollar_value'),
@@ -92,7 +88,7 @@ const availablePrices = R.compose<car[], car[], number[], string[], string>(
 // 	return fastest?.name + ' is the fastest';
 // };
 const append = R.flip(R.concat);
-const fastestCar = R.compose<car[], car[], car, string, string>(
+const fastestCar = R.compose<Car[], Car[], Car, string, string>(
 	append(' is the fastest'),
 	R.prop('name'),
 	R.last,
