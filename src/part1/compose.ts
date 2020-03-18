@@ -1,10 +1,11 @@
-// require('../../support');
-// var _ = require('ramda');
-// var accounting = require('accounting');
-
 import R from 'ramda';
+import accounting from 'accounting';
 
-interface car {
+export interface hasStringIndex {
+	[index: string]: any,
+};
+
+interface car extends hasStringIndex {
 	name: string,
 	horsepower: number,
 	dollar_value: number,
@@ -54,20 +55,32 @@ const averageDollarValue = R.compose(_average, R.map(R.prop('dollar_value')));
 
 const _underscore = R.replace(/\W+/g, '_'); //<-- leave this alone and use to sanitize
 
-const sanitizeNames = R.map(R.compose(_underscore, R.toLower, R.prop('name') as ({ }) => string));
+const sanitizeNames = R.map(
+	R.compose<car, string, string, string>(
+		_underscore,
+		R.toLower,
+		R.prop('name')
+	)
+);
 
 
-// // Bonus 1:
-// // ============
-// // Refactor availablePrices with compose.
+// Bonus 1:
+// ============
+// Refactor availablePrices with compose.
 
-// var availablePrices = function(cars) {
-//   var available_cars = _.filter(_.prop('in_stock'), cars);
-//   return available_cars.map(function(x){
-//     return accounting.formatMoney(x.dollar_value)
-//   }).join(', ');
+// const availablePrices = function (cars: any[]) {
+// 	var available_cars = R.filter(R.prop('in_stock'), cars);
+// 	return available_cars.map(function (x) {
+// 		return accounting.formatMoney(x.dollar_value)
+// 	}).join(', ');
 // };
 
+const availablePrices = R.compose<car[], car[], number[], string[], string>(
+	R.join(', '),
+	R.map<number, string>(accounting.formatMoney),
+	R.pluck('dollar_value'),
+	R.filter(R.prop('in_stock'))
+);
 
 // // Bonus 2:
 // // ============
@@ -95,4 +108,5 @@ export default {
 	nameOfFirstCar,
 	averageDollarValue,
 	sanitizeNames,
+	availablePrices,
 };

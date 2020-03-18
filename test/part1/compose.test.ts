@@ -18,6 +18,10 @@ describe('compose-exercise', () => {
 		action: 'sanitizeNames',
 		expected: ['ferrari_ff', 'spyker_c12_zagato', 'jaguar_xkr_s', 'audi_r8', 'aston_martin_one_77', 'pagani_huayra'],
 		sentence: 'toEqual',
+	}, {
+		action: 'availablePrices',
+		expected: '$700,000.00, $1,850,000.00',
+		sentence: 'toBe',
 	}];
 
 

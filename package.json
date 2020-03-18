@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/zhangaz1/ts-node-template#readme",
   "devDependencies": {
+    "@types/accounting": "^0.4.1",
     "@types/jest": "^25.1.4",
     "@types/node": "^13.9.1",
     "@types/ramda": "^0.26.44",
@@ -31,6 +32,7 @@
     "typescript": "^3.8.3"
   },
   "dependencies": {
+    "accounting": "^0.4.1",
     "ramda": "^0.27.0"
   }
 }
