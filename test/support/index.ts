@@ -43,7 +43,7 @@ export const runTests = (testTarget: any, specialDefaultFields: DefaultTestData)
 			const result = _testTarget(action)
 				.apply(testTarget, params);
 
-			_expectes(sentence)(result, expected);
+			_expectes(sentence)(expected, result);
 		});
 	});
 };
