@@ -57,7 +57,7 @@ const ex4 = R.compose<string, Maybe<string>, Maybe<number>>(mapParseInt, Maybe.o
 // Write a function that will getPost then _.toUpper the post's title
 
 // getPost :: Int -> Future({id: Int, title: String})
-const getPost = function (i: number) {
+const getPost = (i: number) => {
 	return new Task(function (rej: Function, res: Function) {
 		setTimeout(function () {
 			res({ id: i, title: 'Love them futures' })
@@ -77,7 +77,7 @@ interface IUser { name: string, active: boolean };
 
 const showWelcome: (x: IUser) => string = R.compose(R.concat('Welcome '), R.prop('name'));
 
-const checkActive = function (user: IUser) {
+const checkActive = (user: IUser) => {
 	return user.active ? Right.of(user) : Left.of('Your account is not active')
 };
 
@@ -85,13 +85,15 @@ const ex6 = R.compose(R.map(showWelcome) as any as ((x: Right<IUser> | Left<stri
 
 
 
-// // Exercise 7
-// // ==========
-// // Write a validation function that checks for a length > 3. It should return Right(x) if it is greater than 3 and Left("You need > 3") otherwise
+// Exercise 7
+// ==========
+// Write a validation function that checks for a length > 3. It should return Right(x) if it is greater than 3 and Left("You need > 3") otherwise
 
-// var ex7 = function (x) {
-// 	return undefined; // <--- write me. (don't be pointfree)
-// };
+const ex7 = (x: string) => {
+	return x.length > 3
+		? Right.of(x)
+		: Left.of('You need > 3');
+};
 
 
 
@@ -117,4 +119,5 @@ export default {
 	ex4,
 	ex5,
 	ex6,
+	ex7,
 };

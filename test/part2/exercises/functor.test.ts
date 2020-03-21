@@ -51,6 +51,14 @@ describe('functor-exercises', () => {
 		action: 'ex6',
 		expected: Right.of('Welcome Theresa'),
 		params: [{ active: true, name: 'Theresa', }],
+	}, {
+		action: 'ex7',
+		expected: Right.of('fpguy99'),
+		params: ['fpguy99'],
+	}, {
+		action: 'ex7',
+		expected: Left.of('You need > 3'),
+		params: ['...'],
 	},];
 
 	runTests(functorExcercises, { sentence: 'toEqual' })
