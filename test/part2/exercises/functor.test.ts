@@ -1,6 +1,8 @@
 import {
 	Identity,
 	Maybe,
+	Left,
+	Right,
 } from '../../../src/support';
 
 import {
@@ -41,9 +43,15 @@ describe('functor-exercises', () => {
 		action: 'ex4',
 		expected: Maybe.of(4),
 		params: ['4'],
-	},
-		testEx5,
-	];
+	}, testEx5, {
+		action: 'ex6',
+		expected: Left.of('Your account is not active'),
+		params: [{ active: false, name: 'Gary', }],
+	}, {
+		action: 'ex6',
+		expected: Right.of('Welcome Theresa'),
+		params: [{ active: true, name: 'Theresa', }],
+	},];
 
 	runTests(functorExcercises, { sentence: 'toEqual' })
 		(testDatas);

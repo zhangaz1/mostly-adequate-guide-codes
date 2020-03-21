@@ -5,6 +5,7 @@ import R from 'ramda';
 import { trace } from '../../../src/utils';
 
 import {
+	IFunctor,
 	Maybe,
 	Left,
 	Right,
@@ -72,14 +73,15 @@ const ex5 = R.compose<number, typeof Task, typeof Task>(R.map(getUpperTitle), ge
 // Exercise 6
 // ==========
 // Write a function that uses checkActive() and showWelcome() to grant access or return the error
+interface IUser { name: string, active: boolean };
 
-const showWelcome = R.compose<any, string, string>(R.concat('Welcome '), R.prop('name'));
+const showWelcome: (x: IUser) => string = R.compose(R.concat('Welcome '), R.prop('name'));
 
-const checkActive = function (user: { name: string, active: boolean }) {
+const checkActive = function (user: IUser) {
 	return user.active ? Right.of(user) : Left.of('Your account is not active')
 };
 
-const ex6 = undefined;
+const ex6 = R.compose(R.map(showWelcome) as any as ((x: Right<IUser> | Left<string>) => Right<string>), checkActive);
 
 
 
