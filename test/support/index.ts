@@ -10,6 +10,7 @@ interface DefaultTestData {
 export interface TestData extends DefaultTestData {
 	action: string,
 	expected: any,
+	handler?: (done: () => void) => void,
 };
 
 interface ActualDefaultTestData extends DefaultTestData {
@@ -38,12 +39,13 @@ export const runTests = (testTarget: any, specialDefaultFields: DefaultTestData)
 		expected,
 		params = defaultParams,
 		sentence = defaultSentence,
+		handler,
 	}: TestData) => {
-		test(action, () => {
+		test(action, (handler) || (() => {
 			const result = _testTarget(action)
 				.apply(testTarget, params);
 
 			_expectes(sentence)(expected, result);
-		});
+		}));
 	});
 };

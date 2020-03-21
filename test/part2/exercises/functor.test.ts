@@ -10,6 +10,20 @@ import {
 
 import functorExcercises from '../../../src/part2/exercises/functor';
 
+const testEx5: TestData = {
+	action: 'ex5',
+	expected: 'LOVE THEM FUTURES',
+	params: [13],
+};
+
+testEx5.handler = (function (done: Function) {
+	const result = functorExcercises.ex5(13);
+	result.fork(console.log, (res: string) => {
+		expect(res).toEqual(testEx5.expected);
+		done();
+	});
+}).bind(testEx5);
+
 describe('functor-exercises', () => {
 	let testDatas: TestData[] = [{
 		action: 'ex1',
@@ -27,7 +41,9 @@ describe('functor-exercises', () => {
 		action: 'ex4',
 		expected: Maybe.of(4),
 		params: ['4'],
-	},];
+	},
+		testEx5,
+	];
 
 	runTests(functorExcercises, { sentence: 'toEqual' })
 		(testDatas);

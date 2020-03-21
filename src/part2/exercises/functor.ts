@@ -56,7 +56,7 @@ const ex4 = R.compose<string, Maybe<string>, Maybe<number>>(mapParseInt, Maybe.o
 // Write a function that will getPost then _.toUpper the post's title
 
 // getPost :: Int -> Future({id: Int, title: String})
-var getPost = function (i: number) {
+const getPost = function (i: number) {
 	return new Task(function (rej: Function, res: Function) {
 		setTimeout(function () {
 			res({ id: i, title: 'Love them futures' })
@@ -64,7 +64,8 @@ var getPost = function (i: number) {
 	});
 };
 
-var ex5 = undefined;
+const getUpperTitle = R.compose<any, string, string>(R.toUpper, R.prop('title'));
+const ex5 = R.compose<number, typeof Task, typeof Task>(R.map(getUpperTitle), getPost);
 
 
 
@@ -72,13 +73,13 @@ var ex5 = undefined;
 // ==========
 // Write a function that uses checkActive() and showWelcome() to grant access or return the error
 
-var showWelcome = R.compose<any, string, string>(R.concat('Welcome '), R.prop('name'));
+const showWelcome = R.compose<any, string, string>(R.concat('Welcome '), R.prop('name'));
 
-var checkActive = function (user: { name: string, active: boolean }) {
+const checkActive = function (user: { name: string, active: boolean }) {
 	return user.active ? Right.of(user) : Left.of('Your account is not active')
 };
 
-var ex6 = undefined;
+const ex6 = undefined;
 
 
 
@@ -112,4 +113,6 @@ export default {
 	ex2,
 	ex3,
 	ex4,
+	ex5,
+	ex6,
 };
