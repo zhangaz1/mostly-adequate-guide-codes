@@ -2,7 +2,7 @@ import {
 	IIdentity,
 } from '../interfaces';
 
-import inspect from '../inspect';
+import { inspect } from '../../utils';
 import { ContainerBase } from './ContainerBase';
 
 // Identity

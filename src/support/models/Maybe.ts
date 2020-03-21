@@ -2,7 +2,7 @@ import {
 	IMaybe,
 } from '../interfaces';
 
-import inspect from '../inspect';
+import { inspect } from '../../utils';
 import { Identity } from './Identity';
 import { ContainerBase } from './ContainerBase';
 

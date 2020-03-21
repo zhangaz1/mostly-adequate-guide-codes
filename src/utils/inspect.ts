@@ -1,4 +1,4 @@
-export default (x: any) => {
+export const inspect = (x: any) => {
 	return (x && x.inspect)
 		? x.inspect()
 		: x;

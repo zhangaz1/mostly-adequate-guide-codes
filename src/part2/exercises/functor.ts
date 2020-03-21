@@ -1,6 +1,4 @@
-// require('../../support');
-// var Task = require('data.task');
-// var _ = require('ramda');
+const Task = require('data.task');
 
 import R from 'ramda';
 
@@ -8,6 +6,8 @@ import { trace } from '../../../src/utils';
 
 import {
 	Maybe,
+	Left,
+	Right,
 } from '../../support';
 
 // Exercise 1
@@ -51,34 +51,34 @@ const ex4 = R.compose<string, Maybe<string>, Maybe<number>>(mapParseInt, Maybe.o
 
 
 
-// // Exercise 5
-// // ==========
-// // Write a function that will getPost then _.toUpper the post's title
+// Exercise 5
+// ==========
+// Write a function that will getPost then _.toUpper the post's title
 
-// // getPost :: Int -> Future({id: Int, title: String})
-// var getPost = function (i) {
-// 	return new Task(function (rej, res) {
-// 		setTimeout(function () {
-// 			res({ id: i, title: 'Love them futures' })
-// 		}, 300)
-// 	});
-// };
+// getPost :: Int -> Future({id: Int, title: String})
+var getPost = function (i: number) {
+	return new Task(function (rej: Function, res: Function) {
+		setTimeout(function () {
+			res({ id: i, title: 'Love them futures' })
+		}, 300)
+	});
+};
 
-// var ex5 = undefined;
+var ex5 = undefined;
 
 
 
-// // Exercise 6
-// // ==========
-// // Write a function that uses checkActive() and showWelcome() to grant access or return the error
+// Exercise 6
+// ==========
+// Write a function that uses checkActive() and showWelcome() to grant access or return the error
 
-// var showWelcome = _.compose(_.add("Welcome "), _.prop('name'));
+var showWelcome = R.compose<any, string, string>(R.concat('Welcome '), R.prop('name'));
 
-// var checkActive = function (user) {
-// 	return user.active ? Right.of(user) : Left.of('Your account is not active')
-// };
+var checkActive = function (user: { name: string, active: boolean }) {
+	return user.active ? Right.of(user) : Left.of('Your account is not active')
+};
 
-// var ex6 = undefined;
+var ex6 = undefined;
 
 
 
