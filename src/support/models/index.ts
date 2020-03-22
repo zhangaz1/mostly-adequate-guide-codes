@@ -1,7 +1,4 @@
-export { Identity } from './Identity';
-export { Maybe } from './Maybe';
-export {
-	Either,
-	Left,
-	Right,
-} from './Either';
+export * from './Identity';
+export * from './Maybe';
+export * from './Either';
+export * from './IO';

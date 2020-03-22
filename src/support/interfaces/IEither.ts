@@ -1,5 +1,8 @@
+import { IFunctor } from "./IFunctor";
+import { IShowable } from "./IShowable";
+
 export interface IEither { }
 
-export interface ILeft { }
+export interface ILeft extends IFunctor, IShowable { }
 
-export interface IRight { }
+export interface IRight extends IFunctor, IShowable { }

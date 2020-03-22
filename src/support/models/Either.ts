@@ -59,7 +59,7 @@ export class Right<T> extends ContainerBase<T>
 		super(x);
 	}
 
-	map<U>(f: (x: T) => U): Right<U> {
+	map<U>(f: (x: T) => U) {
 		return Right.of(f(this.__value));
 	}
 
@@ -67,7 +67,7 @@ export class Right<T> extends ContainerBase<T>
 		return this.__value;
 	}
 
-	chain<U>(f: (x: T) => U): U {
+	chain<X>(f: (x: T) => X) {
 		return f(this.__value);
 	}
 	ap(other: IFunctor) {

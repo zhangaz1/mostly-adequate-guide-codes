@@ -1,11 +1,13 @@
-export { IFunctor } from './IFunctor';
-export { IShowable } from './IShowable';
+export * from './IFunctor';
+export * from './IShowable';
 
-export { IIdentity } from './IIdentity';
-export { IMaybe } from './IMaybe';
+export * from './IIdentity';
+export * from './IMaybe';
 
-export {
-	IEither,
-	ILeft,
-	IRight,
-} from './IEither';
+export * from './IEither';
+
+export * from './IIO';
+
+export * from './IJoin';
+export * from './IChain';
+export * from './IAp';

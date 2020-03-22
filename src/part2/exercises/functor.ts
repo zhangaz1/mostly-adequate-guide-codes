@@ -5,10 +5,10 @@ import R from 'ramda';
 import { trace } from '../../../src/utils';
 
 import {
-	IFunctor,
 	Maybe,
 	Left,
 	Right,
+	IO,
 } from '../../support';
 
 // Exercise 1
@@ -97,18 +97,18 @@ const ex7 = (x: string) => {
 
 
 
-// // Exercise 8
-// // ==========
-// // Use ex7 above and Either as a functor to save the user if they are valid or return the error message string. Remember either's two arguments must return the same type.
+// Exercise 8
+// ==========
+// Use ex7 above and Either as a functor to save the user if they are valid or return the error message string. Remember either's two arguments must return the same type.
 
-// var save = function (x) {
-// 	return new IO(function () {
-// 		console.log("SAVED USER!");
-// 		return x + '-saved';
-// 	});
-// };
+const save = (x: string) => {
+	return new IO(function () {
+		console.log("SAVED USER!");
+		return x + '-saved';
+	});
+};
 
-// var ex8 = undefined;
+const ex8 = save;
 
 // module.exports = { ex1: ex1, ex2: ex2, ex3: ex3, ex4: ex4, ex5: ex5, ex6: ex6, ex7: ex7, ex8: ex8 };
 
@@ -120,4 +120,5 @@ export default {
 	ex5,
 	ex6,
 	ex7,
+	ex8,
 };

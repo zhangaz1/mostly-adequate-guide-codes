@@ -64,4 +64,10 @@ describe('functor-exercises', () => {
 	runTests(functorExcercises, { sentence: 'toEqual' })
 		(testDatas);
 
+	test('ex8', () => {
+		expect(functorExcercises.ex8('fpguy99').unsafePerformIO()).toBe('fpguy99-saved');
+
+		expect(functorExcercises.ex8('...')).toBe('You need > 3');
+	});
+
 });

@@ -3,7 +3,6 @@ import {
 } from '../interfaces';
 
 import { inspect } from '../../utils';
-import { Identity } from './Identity';
 import { ContainerBase } from './ContainerBase';
 
 // Maybe
@@ -18,34 +17,34 @@ export class Maybe<T> extends ContainerBase<T>
 		super(x);
 	}
 
-	public isNothing() {
+	isNothing() {
 		return this.__value === null
 			|| this.__value === undefined;
 	}
 
-	public map<U>(f: (x: T) => U): Maybe<U> {
+	map<U>(f: (x: T) => U): Maybe<U> {
 		return this.isNothing()
 			? Maybe.of(null as any as U)
 			: Maybe.of(f(this.__value));
 	}
 
-	public chain<U>(f: (x: T) => U) {
-		return this.map(f).join();
-	}
-
-	public join(): Maybe<null> | T {
+	join(): Maybe<null> | T {
 		return this.isNothing()
 			? Maybe.of(null)
 			: this.__value;
 	}
 
-	public ap<U, X>(other: Maybe<U>): Maybe<null | X> {
+	chain<U>(f: (x: T) => U) {
+		return this.map(f).join();
+	}
+
+	ap<U, X>(other: Maybe<U>): Maybe<null | X> {
 		return this.isNothing()
 			? Maybe.of(null)
 			: other.map(this.__value as any as (x: U) => X);
 	}
 
-	public inspect() {
+	inspect() {
 		return `Maybe(${inspect(this.__value)})`;
 	}
 }
