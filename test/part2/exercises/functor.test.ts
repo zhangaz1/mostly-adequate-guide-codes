@@ -65,9 +65,9 @@ describe('functor-exercises', () => {
 		(testDatas);
 
 	test('ex8', () => {
-		expect(functorExcercises.ex8('fpguy99').unsafePerformIO()).toBe('fpguy99-saved');
+		expect(functorExcercises.ex8('fpguy99')?.unsafePerformIO()).toBe('fpguy99-saved');
 
-		expect(functorExcercises.ex8('...')).toBe('You need > 3');
+		expect(functorExcercises.ex8('...')?.unsafePerformIO()).toBe('You need > 3');
 	});
 
 });

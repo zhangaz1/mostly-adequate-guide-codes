@@ -78,3 +78,12 @@ export class Right<T> extends ContainerBase<T>
 		return `Left(${inspect(this.__value)})`
 	}
 }
+
+export function either<T, U, X>(left: (x: T) => U, right: (x: T) => X) {
+	return (e: Left<T> | Right<T>) => {
+		switch (e.constructor) {
+			case Left: return left(e.__value);
+			case Right: return right(e.__value);
+		}
+	};
+}

@@ -1,5 +1,5 @@
 export class ContainerBase<T> {
-	protected __value: T;
+	public __value: T;
 
 	constructor(x: T) {
 		this.__value = x;
