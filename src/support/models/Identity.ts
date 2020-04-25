@@ -1,13 +1,17 @@
 import {
+	IOf,
 	IIdentity,
 } from '../interfaces';
 
 import { inspect } from '../../utils';
 import { ContainerBase } from './ContainerBase';
 
+
+
 // Identity
-export class Identity<T> extends ContainerBase<T>
+class IdentityClass<T> extends ContainerBase<T>
 	implements IIdentity<T> {
+
 	static of<T>(x: T) {
 		return new Identity(x);
 	}
@@ -16,11 +20,13 @@ export class Identity<T> extends ContainerBase<T>
 		super(x);
 	}
 
-	public map<U>(f: (x: T) => T): Identity<T> {
-		return Identity.of(f(this.__value));
+	map(f: (x: T) => T) {
+		return Identity.of(f(this.value));
 	}
 
-	public inspect() {
-		return `Identity(${inspect(this.__value)})`;
+	inspect() {
+		return `Identity(${inspect(this.value)})`;
 	}
 }
+
+export const Identity: IOf<T, IdentityClass<T>> = IdentityClass;

@@ -1,3 +1,1 @@
-export interface IJoin<T> {
-	join(): T;
-}
+// import { IFunctor1 } from "./IFunctor";

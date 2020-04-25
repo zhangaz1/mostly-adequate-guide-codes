@@ -22,16 +22,16 @@ export class Maybe<T> extends ContainerBase<T>
 			|| this.__value === undefined;
 	}
 
-	map<U>(f: (x: T) => U): Maybe<U> {
+	map<U>(f: (x: T) => U): Maybe<null> | Maybe<U> {
 		return this.isNothing()
-			? Maybe.of(null as any as U)
+			? Maybe.of(null)
 			: Maybe.of(f(this.__value));
 	}
 
-	join(): Maybe<null> | T {
+	join() {
 		return this.isNothing()
 			? Maybe.of(null)
-			: this.__value;
+			: this.getValue;
 	}
 
 	chain<U>(f: (x: T) => U) {

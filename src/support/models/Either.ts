@@ -3,6 +3,7 @@ import {
 	ILeft,
 	IRight,
 	IFunctor,
+	EitherType,
 } from '../interfaces';
 
 import { ContainerBase } from './ContainerBase';
@@ -17,11 +18,13 @@ export class Either implements IEither {
 };
 
 export class Left<T> extends ContainerBase<T>
-	implements ILeft, IFunctor {
+	implements ILeft<T>, IFunctor {
 
 	static of<T>(x: T) {
 		return new Left(x);
 	}
+
+	type = EitherType.Left;
 
 	constructor(x: T) {
 		super(x);
@@ -35,11 +38,11 @@ export class Left<T> extends ContainerBase<T>
 		return this;
 	}
 
-	chain() {
+	chain<X>(f: (x: T) => X) {
 		return this;
 	}
 
-	ap(other: any) {
+	ap(other: IFunctor) {
 		return this;
 	}
 
@@ -49,11 +52,13 @@ export class Left<T> extends ContainerBase<T>
 }
 
 export class Right<T> extends ContainerBase<T>
-	implements IRight, IFunctor {
+	implements IRight<T>, IFunctor {
 
 	static of<T>(x: T) {
 		return new Right(x);
 	}
+
+	type = EitherType.Right;
 
 	constructor(x: T) {
 		super(x);
@@ -68,10 +73,10 @@ export class Right<T> extends ContainerBase<T>
 	}
 
 	chain<X>(f: (x: T) => X) {
-		return f(this.__value);
+		return f(this.join());
 	}
 	ap(other: IFunctor) {
-		return this.chain((f: T) => other.map(f as any as Function));
+		return this.chain((f: T) => other.map(f as any as (x: any) => any));
 	}
 
 	inspect() {

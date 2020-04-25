@@ -1,5 +1,3 @@
-import { IJoin } from './IJoin';
+// import R from 'ramda';
 
-export interface IChain<T> extends IJoin<T> {
-	chain<U>(f: (x: T) => U): U;
-}
+// import { IJoin } from './IJoin';
