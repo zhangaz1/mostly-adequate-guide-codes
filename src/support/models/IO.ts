@@ -8,19 +8,17 @@ import {
 
 import { ContainerBase } from './ContainerBase';
 
-export class IO<T extends () => X, X> extends ContainerBase<T>
+export class IO<T extends () => X, X>
 	implements IIO<T>, IShowable {
 
 	static of<X>(x: X) {
 		return new IO(() => x);
 	}
 
-	public get unsafePerformIO() {
-		return this.__value;
-	}
+	unsafePerformIO: T;
 
 	constructor(x: T) {
-		super(x);
+		this.unsafePerformIO = x;
 	}
 
 	map<Y>(f: (x: X) => Y) {
@@ -32,7 +30,7 @@ export class IO<T extends () => X, X> extends ContainerBase<T>
 	}
 
 	chain<Y>(f: (x: X) => Y) {
-		this.map(f).join();
+		return this.map(f).join();
 	}
 
 	ap(other: IFunctor) {
@@ -42,4 +40,8 @@ export class IO<T extends () => X, X> extends ContainerBase<T>
 	inspect() {
 		return `IO(${this.unsafePerformIO})`;
 	}
+}
+
+export function unsafePerformIO<T extends () => X, X>(io: IO<T, X>) {
+	return io.unsafePerformIO();
 }
