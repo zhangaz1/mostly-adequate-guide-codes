@@ -94,7 +94,7 @@ var getPost = function (i: any) {
 	return new Task(function (rej: any, res: any) {
 		setTimeout(function () {
 			res({ id: i, title: 'Love them tasks' }); // THE POST
-		}, 300);
+		}, 10);
 	});
 }
 
@@ -102,11 +102,12 @@ var getComments = function (i: any) {
 	return new Task(function (rej: any, res: any) {
 		setTimeout(function () {
 			res([{ post_id: i, body: "This book should be illegal" }, { post_id: i, body: "Monads are like smelly shallots" }]);
-		}, 300);
+		}, 10);
 	});
 }
 
-var ex3 = undefined;
+// @ts-ignore
+var ex3 = R.compose(chain(R.compose(getComments, R.prop('id'))), getPost);
 
 
 // Exercise 4
@@ -137,7 +138,8 @@ var validateEmail = function (x: any) {
 }
 
 //  ex4 :: Email -> Either String (IO String)
-var ex4 = undefined;
+// @ts-ignore
+var ex4 = R.compose(R.map(R.compose(chain(emailBlast), addToMailingList)), validateEmail);
 
 export default {
 	ex1,
