@@ -6,7 +6,7 @@ import {
 	chain,
 } from '../../support';
 
-var Task = require('data.task');
+const Task = require('data.task');
 import R from 'ramda';
 
 // Exercise 1
